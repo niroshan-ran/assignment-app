@@ -1,0 +1,1 @@
+export const NUMBER_OF_RANDOM_PERSONS = 3;
