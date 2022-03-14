@@ -1,7 +1,7 @@
 import { Person } from "../Model/Person"
 import { ResponseObjRandomAgeAPI } from "../Model/ResponseObjRandomAgeAPI";
 import { ResponseObjRandomPeopleAPI } from "../Model/ResponseObjRandomPeopleAPI";
-import { NUMBER_OF_RANDOM_PERSONS } from "../Utilities/Constants";
+import { Constants } from "../Utilities/Constants";
 
 
 async function requestAPI<TResponse>(
@@ -21,18 +21,19 @@ async function requestAPI<TResponse>(
 
 export let GetThreeRandomPeople = async () => {
 
-    let response = await requestAPI<ResponseObjRandomPeopleAPI>("https://randomuser.me/api/?results=".concat(String(NUMBER_OF_RANDOM_PERSONS)).concat("&nat=us,gb"));
+    
+    let response = await requestAPI<ResponseObjRandomPeopleAPI>(Constants.RANDOM_USER_URL.concat(String(Constants.NUMBER_OF_RANDOM_PERSONS)).concat("&nat=us,gb"));
 
     let personsList: Person[] = [];
 
-    for (let i = 0; i < NUMBER_OF_RANDOM_PERSONS; i++) {
+    for (let i = 0; i < Constants.NUMBER_OF_RANDOM_PERSONS; i++) {
         let dob = new Date(response.results[i].dob.date);
         let personObj: Person = {
             Title: response.results[i].name.title,
             FirstName: response.results[i].name.first,
             LastName: response.results[i].name.last,
             City: response.results[i].location.city,
-            DoB: String().concat(dob.getDate().toString()).concat("/").concat(dob.getMonth().toString()).concat("/").concat(dob.getFullYear().toString()),
+            DoB: dob.toLocaleDateString(),
             ImageURL: response.results[i].picture.large
         }
         personsList.push(personObj)
@@ -44,8 +45,8 @@ export let GetThreeRandomPeople = async () => {
 }
 
 export let GetRandomAgeByName = async (personObjList: Person[]) => {
-    let url = "https://api.agify.io/?";
-    for (let i = 0; i < NUMBER_OF_RANDOM_PERSONS; i++) {
+    let url = Constants.RANDOM_AGE_API_URL
+    for (let i = 0; i < Constants.NUMBER_OF_RANDOM_PERSONS; i++) {
         url = url.concat("name[]=".concat(personObjList[i].FirstName.toLowerCase())).concat("&");
     }
 
@@ -53,7 +54,7 @@ export let GetRandomAgeByName = async (personObjList: Person[]) => {
 
     let personsList: Person[] = [];
 
-    for (let i = 0; i < NUMBER_OF_RANDOM_PERSONS; i++) {
+    for (let i = 0; i < Constants.NUMBER_OF_RANDOM_PERSONS; i++) {
         
         let person: Person = {
             ...personObjList[i],

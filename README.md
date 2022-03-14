@@ -1,3 +1,26 @@
+# Project "assignment-app" created by Niroshan Ranasinghe
+
+These are the Project Files that I made/changed for the assignment
+
+- root
+    - public
+        - index.html
+    - src
+        - Functions
+            - APIRequests.ts
+        - Model
+            - Person.ts
+            - ResponseObjRandomAgeAPI.ts
+            - ResponseObjRandomPeopleAPI.ts
+        - Utilities
+            - Constants.ts
+        - Views
+            - PersonCard.tsx
+    - App.tsx
+    - package.json  
+    
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

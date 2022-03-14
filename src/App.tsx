@@ -52,7 +52,7 @@ function App() {
 
         {(personsList) ?
           personsList.map((personObj, index) => {
-            return <Col><PersonCard key={index} Title={personObj.Title} FirstName={personObj.FirstName} LastName={personObj.LastName} ImageURL={personObj.ImageURL} City={personObj.City} DoB={personObj.DoB} Age={personObj.Age} /></Col>
+            return <Col><PersonCard key={index} {...personObj} /></Col>
           })
           : null}
       </Row>
